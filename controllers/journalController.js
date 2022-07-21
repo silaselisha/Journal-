@@ -41,6 +41,7 @@ exports.createJournal = catchAsync(async (req, res, next) => {
         title: req.body.title,
         description: req.body.description,
         summary: req.body.summary,
+        date: new Date(req.body.date),
         createdAt: new Date(Date.now())
     }
 
@@ -76,9 +77,10 @@ exports.updateJournal = catchAsync(async (req, res, next) => {
     }
 
 
-    let { title, description, summary } = req.body;
+    let { title, description, summary, date } = req.body;
 
     if(title == null) title = journal.title
+    if(date == null) date = journal.date
     if(description == null) description = journal.description
     if(summary == null) summary = journal.summary
 
@@ -90,6 +92,7 @@ exports.updateJournal = catchAsync(async (req, res, next) => {
       title,
       description,
       summary,
+      date,
       createdAt: journal.createdAt,
       updatedAt: new Date(Date.now()),
     };
